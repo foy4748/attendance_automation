@@ -7,7 +7,7 @@ try:
 except ImportError:
     from openpyxl.utils import get_column_letter
 
-wb = lw('./Attendance.xlsx', data_only= True)
+wb = lw('Attendance.xlsx', data_only= True)
 
 #Getting sheet names
 sheets = wb.sheetnames
@@ -66,7 +66,11 @@ while w_sh.cell(row=2, column=i).value != None:
 		index = col_letter + '2'
 		print(index)
 		w_sh[index] = current_date
-	break
+		wb.save('Attendance.xlsx')
+		break
+	elif verify == current_date:
+		print('Attendance is Up to Date')
+		break
 	
 
 
