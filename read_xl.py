@@ -26,9 +26,9 @@ while w_sh.cell(row=i,column=2).value != None:
 attended = list()
 
 for line in fh:
+	if line == None: continue
 	line = line.strip()
-	
-	
+
 	A = line.split('-')		
 	for i in collection:	#Query by Roll number
 		roll_ = i[1].split('-')
@@ -61,13 +61,16 @@ while w_sh.cell(row=2, column=i).value != None:	#while date field is empty
 	if  verify == None and verify != current_date:	#If today's attendance is not written
 		col_letter = get_column_letter(i)
 		index = col_letter + '2'
-		print(index)
+		#print(index)
 		w_sh[index] = current_date
 		wb.save('Attendance.xlsx')
 		break
 		
 	elif verify == current_date:
-		print('Attendance is Up to Date')			#Else
+		col_letter = get_column_letter(i)
+		index = col_letter + '2'
+		#print(index)
+		#print('Attendance is Up to Date')			#Else
 		break
 
 
@@ -77,7 +80,7 @@ row = index[1:5]
 ro = int(row) + 1
 
 
-while w_sh.cell(row=ro, column = co).value == None:
+while w_sh.cell(row=ro, column = co).value != 'Test':
 	
 	roll = w_sh.cell(row=ro, column=2).value	
 	name_ = w_sh.cell(row=ro, column=4).value
@@ -96,5 +99,6 @@ while w_sh.cell(row=ro, column = co).value == None:
 	ro = ro + 1
 
 print(attended)
+print('Attendance is now Up to Date')
 wb.save('Attendance.xlsx')
 	
